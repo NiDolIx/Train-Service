@@ -3,6 +3,7 @@ package com.example.trainservice.repository;
 import com.example.trainservice.config.DataBaseConnection;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +40,7 @@ public class PointRepository {
             }
 
             return null;
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }

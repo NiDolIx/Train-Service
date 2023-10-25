@@ -3,10 +3,8 @@ package com.example.trainservice.repository;
 import com.example.trainservice.config.DataBaseConnection;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.IOException;
+import java.sql.*;
 import java.time.LocalDate;
 
 @Repository
@@ -30,7 +28,7 @@ public class PassengerRepository {
             }
 
             return null;
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }

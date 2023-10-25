@@ -4,6 +4,7 @@ import com.example.trainservice.config.DataBaseConnection;
 import com.example.trainservice.models.*;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,7 +105,7 @@ public class SheduleRepository {
             }
 
             return shedules;
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             throw new RuntimeException(ex);
         }
     }

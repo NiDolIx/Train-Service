@@ -3,6 +3,7 @@ package com.example.trainservice.repository;
 import com.example.trainservice.config.DataBaseConnection;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class TicketRepository {
             preparedStatement.setLong(1, idTicket);
 
             preparedStatement.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -45,7 +46,7 @@ public class TicketRepository {
                 ticketing.setLong(3, idTicket);
                 ticketing.execute();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -94,7 +95,7 @@ public class TicketRepository {
             }
 
             return idTickets;
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
