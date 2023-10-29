@@ -24,6 +24,8 @@ public class TicketRepository {
             preparedStatement.setLong(1, idTicket);
 
             preparedStatement.execute();
+
+            preparedStatement.close();
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,6 +48,8 @@ public class TicketRepository {
                 ticketing.setLong(3, idTicket);
                 ticketing.execute();
             }
+
+            ticketing.close();
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -93,6 +97,9 @@ public class TicketRepository {
             while (resultSet.next()) {
                 idTickets.add(resultSet.getLong("ticket_id"));
             }
+
+            preparedStatement.close();
+            resultSet.close();
 
             return idTickets;
         } catch (SQLException | IOException e) {

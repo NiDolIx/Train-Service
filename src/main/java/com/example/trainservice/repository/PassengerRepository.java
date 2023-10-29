@@ -27,6 +27,8 @@ public class PassengerRepository {
                 return resultSet.getLong("passenger_id");
             }
 
+            resultSet.close();
+
             return null;
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);

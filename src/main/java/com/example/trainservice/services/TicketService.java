@@ -1,5 +1,6 @@
 package com.example.trainservice.services;
 
+import com.example.trainservice.exceptions.BookingTicketException;
 import com.example.trainservice.exceptions.UnbookingTicketException;
 import com.example.trainservice.repository.PassengerRepository;
 import com.example.trainservice.repository.PointRepository;
@@ -38,7 +39,7 @@ public class TicketService {
         ticketRepository.unbooking(idTicket);
     }
 
-    public boolean booking(
+    public void booking (
             String namePassenger,
             String surnamePassenger,
             String patronimycPassenger,
@@ -48,7 +49,7 @@ public class TicketService {
             Long idRoute,
             Integer countTicket,
             Long idWagon
-    ) {
+    ) throws BookingTicketException {
         List<Long> idTickets = ticketRepository.getFreeTickets(
                 idWagon,
                 idRoute,
@@ -57,17 +58,15 @@ public class TicketService {
                 pointNameArrival
         );
 
-        if (idTickets.size() == countTicket) {
-            ticketRepository.booking(passengerRepository.addNewPassenger(
-                    namePassenger,
-                    surnamePassenger,
-                    patronimycPassenger,
-                    birthdayPassenger
-            ), idTickets);
-
-            return true;
-        } else {
-            return false;
+        if (idTickets.size() != countTicket) {
+            throw new BookingTicketException(idTickets.size(), "Не удалось забронировать нужное кол-во билетов!");
         }
+
+        ticketRepository.booking(passengerRepository.addNewPassenger(
+                namePassenger,
+                surnamePassenger,
+                patronimycPassenger,
+                birthdayPassenger
+        ), idTickets);
     }
 }

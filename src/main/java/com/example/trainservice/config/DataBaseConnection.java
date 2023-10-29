@@ -13,7 +13,7 @@ public class DataBaseConnection {
     public static Connection getPostgresConnection() throws SQLException, IOException {
         Properties properties = new Properties();
 
-        try(InputStream in = Files.newInputStream(Paths.get("database.properties"))) {
+        try(InputStream in = Files.newInputStream(Paths.get("src/main/java/com/example/trainservice/config/database.properties"))) {
             properties.load(in);
         }
 
